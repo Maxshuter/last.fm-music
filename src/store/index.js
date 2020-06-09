@@ -1,3 +1,4 @@
+// jshint -W033
 import Vue from 'vue'
 import Vuex from 'vuex'
 
