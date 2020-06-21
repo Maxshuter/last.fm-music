@@ -1,7 +1,6 @@
 <template>
-    <v-app>
+    <div id="header">
         <v-app-bar dark absolute color="#a80303">
-            <!-- <v-toolbar color="#f75959"></v-toolbar> -->
             <img id="logo" src="../assets/logo_header.png" alt="LAST FM">
             <v-spacer></v-spacer>
             <v-toolbar-items>
@@ -10,35 +9,40 @@
                     {{item.title}}
                 </v-btn>
             </v-toolbar-items>
+            <v-progress-linear id="load" v-show="LOADING" :active="LOADING" :indeterminate="LOADING" background-opacity="0" absolute bottom color="white accent-4"></v-progress-linear>         
         </v-app-bar>
-    </v-app>
+    </div>
 </template>
 
 <script>
+ import { mapGetters } from 'vuex'
+
     export default {
-        computed: {
-            menuItems() {
-                return [
-                    {
-                        title: 'HOME',
-                        icon: 'mdi-home',
-                        route: '/performers'
+               computed: {
+                    menuItems() {
+                        return [
+                            {
+                                title: 'HOME',
+                                icon: 'mdi-home',
+                                route: '/'
+                            },
+
+                            {
+                                title: 'MUSIC',
+                                icon: 'mdi-music',
+                                route: '/music'
+                            }
+                        ]
                     },
 
-                    {
-                        title: 'MUSIC',
-                        icon: 'mdi-music',
-                        route: '/music'
-                    }
-                ]
-            }
-        }
-        
+                    ...mapGetters(['LOADING'])
+        },
     }
 </script>
 
 <style scoped>
-#logo{
-    block-size: 50%;
-}
+    #logo {
+        block-size: 50%;
+    } 
+
 </style>

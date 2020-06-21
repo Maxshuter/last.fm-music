@@ -1,10 +1,10 @@
 <template>
-  <div id="app">
-    <Header>
-      
-    </Header>
-    <router-view/>
-  </div>
+  <v-app>
+      <v-content>
+        <Header id="nav"></Header>
+        <router-view></router-view>
+      </v-content>
+  </v-app>
 </template>
 
 <script>
@@ -17,25 +17,26 @@ export default {
 }
 </script>
 
-<!--<style>
-#app {
+<style>
+/* #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-}
+} */
 
 #nav {
-  padding: 30px;
+  padding: 35px;
+  position:-webkit-sticky; position:sticky; top:0;
 }
 
-#nav a {
+/* #nav a {
   font-weight: bold;
   color: #2c3e50;
 }
 
 #nav a.router-link-exact-active {
   color: #42b983;
-}
-</style>-->
+} */
+</style>
