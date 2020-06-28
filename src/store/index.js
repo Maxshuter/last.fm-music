@@ -1,8 +1,6 @@
 // jshint -W033
 import Vue from 'vue'
 import Vuex from 'vuex'
-//import axios from 'axios'
-
 
 
 Vue.use(Vuex)
@@ -12,6 +10,8 @@ export default new Vuex.Store({
     loading: false,
     artists: [],
     props: {},
+    page: null,
+    temps: []
   },
   getters: {
     ARTISTS: state => {
@@ -19,31 +19,40 @@ export default new Vuex.Store({
     },
     LOADING: state => {
       return state.loading
+    },
+    PAGE: state => {
+      return state.page
     }
   },
   mutations: {
     SET_ARTISTS: (state, payload) => {
-      state.artists = payload.artist
-    
+      state.artists = payload
     },
     SET_LOADING: (state, payload) => {
       state.loading = payload
+    },
+    SET_PAGE: (state, payload) => {
+      state.page = payload
     }
   },
   actions: {
-    SET_ARTISTS: ({commit}, getData) => {                  
+    LOAD: async ({commit}, [getData, PAGE]) => {   
        commit('SET_LOADING', true)
-       getData().then(data => {
-          commit('SET_ARTISTS', data)
+        try {
+          
+          const response = await getData(PAGE)
+          //commit('SET_PAGE', response['@attr'].page)
+          //commit('SET_ARTISTS', response.artist)
           commit('SET_LOADING', false)
-          return data
-       }).catch(({response}) => {
+          
+          return response
+        } catch (e) {
           commit('SET_LOADING', false)
-          console.log(response.data)
-          return response.data
-       })  
+          return e
+        }    
+         
     }
-  },
+},
   modules: {
   }
 })

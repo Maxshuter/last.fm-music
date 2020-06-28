@@ -5,9 +5,11 @@ import router from './router'
 import store from './store'
 import vuetify from '@/plugins/vuetify'
 import lastfm from './plugins/lastfm'
+import InfiniteLoading from 'vue-infinite-loading';
 
 Vue.config.productionTip = false
 Vue.use(lastfm);
+Vue.use(InfiniteLoading, { /* options */ });
 
 new Vue({
   router,
