@@ -1,29 +1,27 @@
 //jshint -W033
-//import { /* mapActions, */ mapGetters } from 'vuex'
+import { /* mapActions, */ mapGetters } from 'vuex'
 import TileItem from '../components/TileItem'
 export default {
+
     components: { TileItem },
-    data() {
-        return {
-            page: 1
-        }
-    },
+
     created() {
-        if (!this.dataTile.length) this.loadTile()
+        if (!this.dataTile.length) this.loadData()
     },
     computed: {
-        //...mapGetters(['PAGE', 'LOADING']),
-        dataTile() { return [] },
-          
+        ...mapGetters(['PAGE', 'LOADING']),
+        dataTile() { return [] },    
     },
     methods: {
 
-        loadTile() {
-            const {infiniteHandler} = this
-
-            return infiniteHandler()
-               
-        },
-
+        infiniteHandler($state) {
+            this.loadData().then(data_is_uploaded => { 
+              if (data_is_uploaded) {
+                $state.loaded()
+                } else {
+                  $state.complete()   
+                 }
+            })
+          },
     }
 }

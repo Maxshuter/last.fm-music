@@ -1,8 +1,8 @@
 <template>
-    <v-skeleton-loader  width="300px" height="300px" :loading="LOADING" type="card">
-      <v-card dark class="card dws">
+    <v-skeleton-loader  width="300px" height="300px" :loading="false" type="card">
+      <v-card max-width="360" @click="$emit('click')" dark class="card dws mx-auto">
         <v-img 
-          :src="artist_data.image[4]['#text']"
+          :src="dataTile.image[3]['#text']"
           class="white--text align-end blocImg"
           gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
           height="300px"/>
@@ -13,7 +13,7 @@
                 </v-btn>
                 {{item.data}}
             </div>
-            <v-card-title class="card-title" v-text="artist_data.name"></v-card-title> 
+            <v-list-item-title :title="dataTile.name" class="card-title" v-text="dataTile.name"></v-list-item-title> 
           </div>
       </v-card>
     </v-skeleton-loader>
@@ -23,20 +23,20 @@
  import { mapGetters } from 'vuex'
 
 export default {
-    data: function () {
+    data () {
       return {
         items: [
           {
             color: 'red',
             icon: 'mdi-account-music',
             title: 'Listeners',
-            data: this.artist_data.listeners,
+            data: this.dataTile.listeners,
           }, 
           {
             color: 'blue',
             icon: 'mdi-headphones',
             title: 'Playcount',
-            data: this.artist_data.playcount,
+            data: this.dataTile.playcount,
           }
         ]
       }
@@ -44,7 +44,7 @@ export default {
     },
 
     props: {
-      artist_data: {
+      dataTile: {
         type: Object,
         default() {
           return {}
@@ -58,7 +58,7 @@ export default {
 }
 </script>
 
-<style>
+<style >
 
   .disable-events {
     pointer-events: none
@@ -66,10 +66,11 @@ export default {
 
     .card-title {
       position: absolute;
-      top: 180px;
+      top: 200px;
       width: 250px;
       border-left: 4px solid #ffb611;
       padding: 0 10px;
+      font-size: 20px !important;
     } 
 
   .blocImg {

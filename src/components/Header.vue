@@ -1,6 +1,6 @@
 <template>
     <div id="header">
-        <v-app-bar dark absolute color="#a80303">
+        <v-app-bar app dark color="#a80303">
             <img id="logo" src="../assets/logo_header.png" alt="LAST FM">
             <v-spacer></v-spacer>
             <v-toolbar-items>

@@ -1,7 +1,7 @@
 <template>
   <v-app>
+      <Header id="nav"></Header>
       <v-content>
-        <Header id="nav"></Header>
         <router-view></router-view>
       </v-content>
   </v-app>
@@ -19,9 +19,6 @@ export default {
 
 <style>
 
-#nav {
-  padding: 35px;
-  position:-webkit-sticky; position:sticky; top:0;
-}
+
 
 </style>

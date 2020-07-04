@@ -8,7 +8,10 @@ const API_KEY = '18889af1db2a0d29ed039144e3aeb630'
 const lastfm = {
 
     getTopArtists: page => axios.get(`${URL}?method=chart.gettopartists&page=${page}&api_key=${API_KEY}&format=json`)
-                                .then(response => response.data.artists)
+                                .then(response => response.data.artists),
+
+    getTopTracks: page => axios.get(`${URL}?method=chart.gettoptracks&page=${page}&api_key=${API_KEY}&format=json`)
+                                .then(response => response.data.tracks)
                                 
 }
 
@@ -18,5 +21,5 @@ export default {
     }
   }
 
-console.log(lastfm.getTopArtists())
+console.log(lastfm.getTopTracks())
 

@@ -1,10 +1,10 @@
 <template>
-  <div class="home">
-      <h1>Top artists</h1>
+  <div class="music">
+      <h1>Top tracks</h1>
       <v-layout>
         <v-row>
-          <v-col v-for="(artist, i) in dataTile" :key="`dataTile${i}`">
-              <TileItem :dataTile="artist"/>
+          <v-col v-for="(track, i) in dataTile" :key="`dataTile${i}`">
+              <TileItem :dataTile="track"/>
           </v-col>
           <infinite-loading :distance=0 @infinite="infiniteHandler"></infinite-loading>
         </v-row>
@@ -18,20 +18,20 @@ import { mapGetters, mapActions } from 'vuex'
 import infiniteHandler from '../mixins/infiniteHandler'
 
 export default {
-  name: 'Home',
-
+  name: 'Music',
+ 
   mixins: [infiniteHandler],
   
   computed: {
 
-    ...mapGetters({dataTile: 'ARTISTS'}),
-    
+    ...mapGetters({dataTile: 'TRACKS'}),
+
     getData() {
-        return this.$lastfm.getTopArtists
+        return this.$lastfm.getTopTracks
     }, 
 
     page() { 
-        return this.PAGE.artists || 1  
+        return this.PAGE.tracks || 1
     },
 
   },
@@ -43,8 +43,8 @@ export default {
         try {
             const response = await this.LOAD([this.getData, this.page])
             
-            this.$store.commit('SET_ARTISTS', [...this.dataTile, ...response.artist])
-            this.$store.commit('SET_PAGE', { artists: this.page + 1 })
+            this.$store.commit('SET_TRACKS', [...this.dataTile, ...response.track])
+            this.$store.commit('SET_PAGE', { tracks: this.page + 1 })
             
             return true
         } catch (e) {
@@ -52,8 +52,9 @@ export default {
           return e
         }    
       },
-   },    
- }     
+   },
+   
+}     
 </script>
 
 <style scoped>
@@ -61,7 +62,7 @@ h1{
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 5px 0;
+  margin: 20px 0;
   text-shadow:  0 0 2em red;
   font-family: Open Sans,Lucida Grande,Helvetica Neue,Helvetica,Arial,Sans-serif;
   font-size: 48px
