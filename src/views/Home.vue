@@ -1,10 +1,10 @@
 <template>
   <div class="home">
-      <h1>Top artists</h1>
+      <h1 align="center">Top artists</h1>
       <v-layout>
         <v-row>
           <v-col v-for="(artist, i) in dataTile" :key="`dataTile${i}`">
-              <TileItem :dataTile="artist"/>
+              <TileItem @click="goToPage(i)" :dataTile="artist"/>
           </v-col>
           <infinite-loading :distance=0 @infinite="infiniteHandler"></infinite-loading>
         </v-row>
@@ -52,15 +52,16 @@ export default {
           return e
         }    
       },
+
+      goToPage(i) {
+        this.$router.push({name: 'Albums', query: {'artist': this.dataTile[i].name}})
+      }
    },    
  }     
 </script>
 
 <style scoped>
 h1{
-  display: flex;
-  align-items: center;
-  justify-content: center;
   margin: 5px 0;
   text-shadow:  0 0 2em red;
   font-family: Open Sans,Lucida Grande,Helvetica Neue,Helvetica,Arial,Sans-serif;

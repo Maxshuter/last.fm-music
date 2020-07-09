@@ -9,9 +9,10 @@ export default new Vuex.Store({
   state: {
     loading: false,
     artists: [],
-    props: {},
+    album: {},
     pages: {},
-    tracks: []
+    tracks: [],
+    albums: []
   },
   getters: {
     ARTISTS: state => {
@@ -25,6 +26,12 @@ export default new Vuex.Store({
     },
     TRACKS: state => {
       return state.tracks
+    },
+    ALBUMS: state => {
+      return state.albums
+    },
+    ALBUM: state => {
+      return state.album
     }
   },
   mutations: {
@@ -39,14 +46,20 @@ export default new Vuex.Store({
     },
     SET_TRACKS: (state, payload) => {
       state.tracks = payload
+    },
+    SET_ALBUMS: (state, payload) => {
+      state.albums = payload
+    },
+    SET_ALBUM: (state, payload) => {
+      state.album = payload
     }
   },
   actions: {
-    LOAD: async ({commit}, [getData, page]) => {   
+    LOAD: async ({commit}, [getData, ...properties]) => {   
        commit('SET_LOADING', true)
         try {
           
-          const response = await getData(page)
+          const response = await getData(...properties)
 
           commit('SET_LOADING', false)
           

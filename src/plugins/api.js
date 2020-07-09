@@ -11,7 +11,13 @@ const lastfm = {
                                 .then(response => response.data.artists),
 
     getTopTracks: page => axios.get(`${URL}?method=chart.gettoptracks&page=${page}&api_key=${API_KEY}&format=json`)
-                                .then(response => response.data.tracks)
+                                .then(response => response.data.tracks),
+                                
+    getTopAlbums: (page, artist) => axios.get(`${URL}?method=artist.gettopalbums&artist=${artist}&page=${page}&api_key=${API_KEY}&format=json`)
+                                .then(response => response.data.topalbums),
+
+    getAlbumInfo: (artist, album) => axios.get(`${URL}?method=album.getinfo&api_key=${API_KEY}&artist=${artist}&album=${album}&format=json`)
+                                .then(response => response.data.album)
                                 
 }
 
@@ -21,5 +27,4 @@ export default {
     }
   }
 
-console.log(lastfm.getTopTracks())
 

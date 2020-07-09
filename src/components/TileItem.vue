@@ -1,14 +1,14 @@
 <template>
-    <v-skeleton-loader  width="300px" height="300px" :loading="false" type="card">
-      <v-card max-width="360" @click="$emit('click')" dark class="card dws mx-auto">
+    <v-skeleton-loader  min-width="300" max-width="360" height="300px" :loading="LOADING" type="image, image">
+      <v-card min-width="300" max-width="360" @click="$emit('click')" dark class="card dws mx-auto">
         <v-img 
           :src="dataTile.image[3]['#text']"
           class="white--text align-end blocImg"
-          gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
+          gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.8)"
           height="300px"/>
-          <div class="blocText">
-            <div v-for="(item, i) in items" :key="`items${i}`" class="text" :title="item.title">
-                <v-btn  fab x-small :color="item.color" class="disable-events">
+          <div class="blocText" >
+            <div v-for="(item, i) in items" :key="`items${i}`" :class="{'mx-auto': item.data, text: true} " :title="item.title">
+                <v-btn v-if="item.data" fab x-small :color="item.color" class="disable-events">
                   <v-icon class="icon" v-html="item.icon"></v-icon>
                 </v-btn>
                 {{item.data}}
@@ -27,20 +27,19 @@ export default {
       return {
         items: [
           {
-            color: 'red',
-            icon: 'mdi-account-music',
-            title: 'Listeners',
-            data: this.dataTile.listeners,
-          }, 
-          {
             color: 'blue',
             icon: 'mdi-headphones',
             title: 'Playcount',
             data: this.dataTile.playcount,
-          }
-        ]
+          },
+          {
+            color: 'red',
+            icon: 'mdi-account-music',
+            title: 'Listeners',
+            data: this.dataTile.listeners,
+          } 
+        ],
       }
-
     },
 
     props: {
@@ -96,15 +95,6 @@ export default {
     opacity: 0;
     transition: .5s;
     font-size: 15px;
-  }
-
-  .text h2 {
-    font-size: 25px;
-  }
-  .text h2 span {
-    color: orange;
-    padding-bottom: 3px;
-    border-bottom: 2px solid #fff;
   }
 
   .dws:hover .text {
